@@ -1,32 +1,47 @@
-import {createAppContainer, createDrawerNavigator, createSwitchNavigator} from 'react-navigation';
+import {createAppContainer, createDrawerNavigator, createStackNavigator, createSwitchNavigator} from 'react-navigation';
 
-import HomeItemDetails from './HomeItemDetails';
+import HomeItemDetail from './HomeItemDetail';
 import Login from './Login';
 import Welcome from './Welcome';
 import Home from './Home';
+import CreateItem from "./CreateItem";
+import SelectFarmer from "./SelectFarmer";
 
-/*
-const AuthNavigator = createStackNavigator(
+const HomeNavigator = createStackNavigator(
     {
-        Login: {screen: Login},
-        Home: {screen: Home},
-        Welcome: {screen: Welcome},
-        Register: {screen: Register}
+        Home: {
+            screen: Home,
+            navigationOptions: {
+                header: null,
+            },
+        },
+        HomeItemDetail: {
+            screen: HomeItemDetail,
+            navigationOptions: {
+                header: null,
+            },
+        },
+        SelectFarmer: {
+            screen: SelectFarmer,
+            navigationOptions: {
+                header: null,
+            },
+        },
+        CreateItem: {screen: CreateItem},
     },
     {
-        initialRouteName: 'Welcome',
+        initialRouteName: 'Home',
     }
 );
-*/
 
 const AppNavigator = createDrawerNavigator(
     {
         Home: {
-            screen: Home,
+            screen: HomeNavigator,
             title: 'Home'
         },
         contracts: {
-            screen: HomeItemDetails,
+            screen: HomeItemDetail,
             navigationOptions: () => ({
                 title: 'Generar Contrato',
             }),

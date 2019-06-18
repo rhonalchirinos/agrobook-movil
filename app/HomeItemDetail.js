@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 
-export default class HomeItemDetails extends React.Component {
+export default class HomeItemDetail extends React.Component {
 
     constructor(props) {
         super(props);

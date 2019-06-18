@@ -12,4 +12,21 @@ export default class ContractService {
         }
         return {data: []};
     }
+
+    static async store(value) {
+       return await axios.post(conf.api + 'contracts', value);
+    }
+
+
+    static async farmers() {
+        try {
+            const response = await axios.get(conf.api + 'farmers');
+            return response;
+        } catch (error) {
+            console.log('error', error);
+        }
+        return {data: []};
+    }
+
+
 }
