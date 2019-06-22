@@ -11,7 +11,8 @@ export default class Home extends React.Component {
         this.state = {
             elements: [],
             selectedIndex: 0,
-            loading: false
+            loading: false,
+            user: null
         };
         this.actions = [
             {
@@ -28,6 +29,7 @@ export default class Home extends React.Component {
     componentDidMount() {
         AsyncStorage.getItem('@book:user').then((user) => {
             this.setState({user: JSON.parse(user)});
+            console.log('USER :', user)
         });
         this.load();
     }
@@ -176,10 +178,12 @@ export default class Home extends React.Component {
                     </Card>
                     }
                 </ScrollView>
-                { (this.state.user && this.state.user.role_id === 1  )&&
+
+                { (this.state.user &&  this.state.user.data.role_id === 1  )&&
                 <FloatingAction
                     actions={this.actions}
                     onPressItem={name => {
+                        console.log( this.state.user.data.role_id === 1 )
                         console.log(`selected button: ${name}`);
                         this.OnGenerate()
                     }}
