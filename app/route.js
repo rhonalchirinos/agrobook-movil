@@ -1,11 +1,11 @@
 import {createAppContainer, createDrawerNavigator, createStackNavigator, createSwitchNavigator} from 'react-navigation';
 
 import HomeItemDetail from './HomeItemDetail';
-import Login from './Login';
+import Login from './auth/Login';
 import Welcome from './Welcome';
 import Home from './Home';
-import CreateItem from "./CreateItem";
-import SelectFarmer from "./SelectFarmer";
+import CreateItem from "./components/CreateItem";
+import SelectFarmer from "./components/SelectFarmer";
 
 const HomeNavigator = createStackNavigator(
     {
@@ -27,7 +27,12 @@ const HomeNavigator = createStackNavigator(
                 header: null,
             },
         },
-        CreateItem: {screen: CreateItem},
+        CreateItem: {
+            screen: CreateItem,
+            navigationOptions: {
+                header: null,
+            },
+        },
     },
     {
         initialRouteName: 'Home',
@@ -40,12 +45,14 @@ const AppNavigator = createDrawerNavigator(
             screen: HomeNavigator,
             title: 'Home'
         },
+        /*
         contracts: {
             screen: HomeItemDetail,
             navigationOptions: () => ({
                 title: 'Generar Contrato',
             }),
         },
+        */
     },
     {
         initialRouteName: 'Home'

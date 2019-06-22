@@ -61,11 +61,9 @@ const styles = StyleSheet.create({
     input: {
         margin: 15,
         height: 40,
-        borderColor: "black",
         borderWidth: 1
     },
     submitButton: {
-        backgroundColor: "black",
         padding: 10,
         margin: 15,
         alignItems: "center",

@@ -1,8 +1,8 @@
-import {AsyncStorage, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import conf from './Configuration';
+import {AsyncStorage, StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from 'react-native';
+import conf from '../Configuration';
 import React from 'react';
 import axios from 'axios';
-import Service from "./store/Service";
+import Service from "../store/Service";
 
 export default class Login extends React.Component {
 
@@ -56,9 +56,10 @@ export default class Login extends React.Component {
                     />
                     <TouchableOpacity
                         style={styles.submitButton}
+                        tit
                         onPress={this.login.bind(this)}
                     >
-                        <Text style={styles.submitButtonText}> Submit </Text>
+                        <Text style={styles.submitButtonText}> INICIAR </Text>
                     </TouchableOpacity>
 
                     <View>
@@ -66,7 +67,11 @@ export default class Login extends React.Component {
                         <Text> Contraseña Invalida </Text>
                         }
                     </View>
-
+                    <View style={{alignItems: 'center'}}>
+                    <Image
+                        source={require('./../../assets/agro.jpg')}
+                    />
+                    </View>
                 </View>
             </View>
         );
@@ -81,7 +86,6 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         backgroundColor: '#F5FCFF',
         margin: 15,
-
     },
     input: {
         fontSize: 12,
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     submitButton: {
-        backgroundColor: 'black',
+        backgroundColor: 'blue',
         padding: 10,
         margin: 5,
         alignItems: 'center',

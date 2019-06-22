@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import ContractService from "./store/ContractService";
-import {Button, Card, Icon} from "react-native-elements";
+import ContractService from "../store/ContractService";
+import {Button, Card, Header, Icon} from "react-native-elements";
 
 
 export default class CreateItem extends React.Component {
@@ -22,8 +22,6 @@ export default class CreateItem extends React.Component {
 
     componentDidMount() {
         ContractService.farmers().then(elements => {
-            // debugger;
-            console.log(elements.data.data, '<---------------');
             this.setState({farmers: elements.data.data});
         });
     }
@@ -38,7 +36,8 @@ export default class CreateItem extends React.Component {
             farmers: this.state.farmers,
             back: (data) => {
                 if (data) {
-                    _this.setState({farmer: data.item});
+                    console.log(data.item);
+                    _this.state.farmer = data.item;
                     _this.valid();
                 }
             }
@@ -71,7 +70,7 @@ export default class CreateItem extends React.Component {
     }
 
     valid() {
-
+        console.log( this.state, '<------------')
         if (!this.state.farmer) {
             this.setState({disabled: true});
             return false
@@ -95,19 +94,27 @@ export default class CreateItem extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Card title='AgroBook'>
+                <Header
+                    placement='left'
+                    leftComponent={{
+                        icon: 'chevron-left', color: '#fff', onPress: () => {
+                            console.log( this.props.navigation);
+                            this.props.navigation.goBack();
+                        }
+                    }}
+                />
+                <Card title='AGREGAR CONTRATO'>
 
                     <Text> DIRECCION </Text>
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid='transparent'
-                        placeholder='DIRECCION'
                         placeholderTextColor='black'
                         autoCapitalize='none'
                         maxLength={255}
                         onChangeText={(address) => {
                             this.setState({address});
-                            this.valid()
+                            this.valid();
                         }}
                     />
 
@@ -115,7 +122,6 @@ export default class CreateItem extends React.Component {
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid='transparent'
-                        placeholder='SEMILLAS'
                         placeholderTextColor='black'
                         autoCapitalize='none'
                         maxLength={255}
@@ -147,10 +153,7 @@ export default class CreateItem extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
-        justifyContent: 'center',
         backgroundColor: '#F5FCFF',
-        margin: 15,
     },
     input: {
         fontSize: 12,
