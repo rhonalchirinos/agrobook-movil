@@ -13,7 +13,6 @@ export default class SelectFarmer extends React.Component {
         this.back = null;
     }
 
-
     componentDidMount() {
         const {navigation} = this.props;
         this.setState({
@@ -27,7 +26,6 @@ export default class SelectFarmer extends React.Component {
     };
 
     onSelect(item) {
-        console.log(item);
         this.props.navigation.pop(1);
         if (this.back) {
             this.back({
@@ -76,12 +74,4 @@ export default class SelectFarmer extends React.Component {
             </View>
         );
     }
-
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#fff',
-    },
-});
-

@@ -6,6 +6,8 @@ import Welcome from './Welcome';
 import Home from './Home';
 import CreateItem from "./components/CreateItem";
 import SelectFarmer from "./components/SelectFarmer";
+import MyMap from "./components/MyMap";
+// import Map from './components/MyMap';
 
 const HomeNavigator = createStackNavigator(
     {
@@ -33,6 +35,12 @@ const HomeNavigator = createStackNavigator(
                 header: null,
             },
         },
+        MyMap: {
+            screen: MyMap,
+            navigationOptions: {
+                header: null,
+            },
+        },
     },
     {
         initialRouteName: 'Home',
@@ -45,14 +53,13 @@ const AppNavigator = createDrawerNavigator(
             screen: HomeNavigator,
             title: 'Home'
         },
-        /*
-        contracts: {
-            screen: HomeItemDetail,
+        /*contracts: {
+            screen: Map,
             navigationOptions: () => ({
                 title: 'Generar Contrato',
             }),
         },
-        */
+    */
     },
     {
         initialRouteName: 'Home'

@@ -24,7 +24,6 @@ export default class CompleteContract extends React.Component {
             floor_power: String(this.props.floor_power),
             planting_date: ContractService.formatDate(this.props.planting_date),
         });
-        console.log('DATEEE', this.props.planting_date)
     }
 
     save() {
@@ -44,16 +43,13 @@ export default class CompleteContract extends React.Component {
     valid() {
         if (this.state.floor_power === '') {
             this.setState({disabled: true});
-            console.log('return false');
             return false;
         }
         if (this.state.planting_date === '') {
             this.setState({disabled: true});
-            console.log('return false');
             return false;
         }
         this.setState({disabled: false});
-        console.log('return true')
         return true;
     }
 

@@ -16,8 +16,6 @@ export default class CreateItem extends React.Component {
             disabled: true
         };
         this.address = null;
-
-
     }
 
     componentDidMount() {
@@ -36,9 +34,21 @@ export default class CreateItem extends React.Component {
             farmers: this.state.farmers,
             back: (data) => {
                 if (data) {
-                    console.log(data.item);
                     _this.state.farmer = data.item;
                     _this.valid();
+                }
+            }
+        });
+    }
+
+    onSelectDir() {
+        const _this = this;
+        this.props.navigation.push('MyMap', {
+            farmers: this.state.farmers,
+            back: (data) => {
+                if (data.item) {
+                    console.log( data.item, '<--------');
+                    _this.setState({address: data.item })
                 }
             }
         });
@@ -70,7 +80,6 @@ export default class CreateItem extends React.Component {
     }
 
     valid() {
-        console.log( this.state, '<------------')
         if (!this.state.farmer) {
             this.setState({disabled: true});
             return false
@@ -98,7 +107,7 @@ export default class CreateItem extends React.Component {
                     placement='left'
                     leftComponent={{
                         icon: 'chevron-left', color: '#fff', onPress: () => {
-                            console.log( this.props.navigation);
+                            console.log(this.props.navigation);
                             this.props.navigation.goBack();
                         }
                     }}
@@ -108,19 +117,23 @@ export default class CreateItem extends React.Component {
                     <Text> DIRECCION </Text>
                     <TextInput
                         style={styles.input}
+                        multiline={true}
+                        numberOfLines={4}
                         underlineColorAndroid='transparent'
                         placeholderTextColor='black'
                         autoCapitalize='none'
                         maxLength={255}
+                        value={this.state.address}
                         onChangeText={(address) => {
                             this.setState({address});
                             this.valid();
                         }}
                     />
-
                     <Text> SEMILLAS </Text>
                     <TextInput
                         style={styles.input}
+                        multiline={true}
+                        numberOfLines={4}
                         underlineColorAndroid='transparent'
                         placeholderTextColor='black'
                         autoCapitalize='none'
@@ -133,7 +146,6 @@ export default class CreateItem extends React.Component {
                     <Text> AGRICULTORES </Text>
                     <Text style={styles.input}
                           onPress={this.onSelectFarmer.bind(this)}> {this.farmerName(this.state.farmer)} </Text>
-
                     <Button
                         disabled={this.state.disabled}
                         onPress={this.onSave.bind(this)}
@@ -141,14 +153,17 @@ export default class CreateItem extends React.Component {
                         backgroundColor='#03A9F4'
                         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                         title='GENERAR CONTRATO'/>
+
+                    <Button
+                        onPress={this.onSelectDir.bind(this)}
+                        backgroundColor='#03A9F4'
+                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                        title='MAPA'/>
+
                 </Card>
-
             </View>
-
-
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -159,19 +174,8 @@ const styles = StyleSheet.create({
         fontSize: 12,
         padding: 5,
         margin: 5,
-        height: 40,
         borderColor: 'black',
         backgroundColor: '#fff',
         borderWidth: 1
     },
 });
-
-/*
-*
-* {
-   "address" : "Barrio el jebe sector la estrella, Barquisimeto Estado Lara",
-   "seed": "caraotas, lentejas",
-   "planting_date": "08/12/1990",
-   "farmer_id": 2
-}
-* */

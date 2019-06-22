@@ -89,7 +89,6 @@ export default class Home extends React.Component {
 
     showModal(item) {
         this.props.navigation.push('HomeItemDetail', {item: item});
-        console.log(item);
     }
 
     updateIndex(selectedIndex) {
