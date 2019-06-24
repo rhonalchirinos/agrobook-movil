@@ -143,7 +143,7 @@ export default class CreateItem extends React.Component {
                             this.valid();
                         }}
                     />
-                    <Text> AGRICULTORES </Text>
+                    <Text> AGRICULTOR </Text>
                     <Text style={styles.input}
                           onPress={this.onSelectFarmer.bind(this)}> {this.farmerName(this.state.farmer)} </Text>
 
