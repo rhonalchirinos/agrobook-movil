@@ -146,19 +146,26 @@ export default class CreateItem extends React.Component {
                     <Text> AGRICULTORES </Text>
                     <Text style={styles.input}
                           onPress={this.onSelectFarmer.bind(this)}> {this.farmerName(this.state.farmer)} </Text>
-                    <Button
-                        disabled={this.state.disabled}
-                        onPress={this.onSave.bind(this)}
-                        icon={<Icon name='plus-square' color='#ffffff' type='font-awesome'/>}
-                        backgroundColor='#03A9F4'
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                        title='GENERAR CONTRATO'/>
 
-                    <Button
-                        onPress={this.onSelectDir.bind(this)}
-                        backgroundColor='#03A9F4'
-                        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                        title='MAPA'/>
+
+                    <View  style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                        <View style={{paddingRight: 20}}>
+                            <Button
+                                onPress={this.onSelectDir.bind(this)}
+                                backgroundColor='#03A9F4'
+                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                                title='MAPA'/>
+                        </View>
+                        <View >
+                            <Button
+                                style={{alignSelf: 'flex-end'}}
+                                disabled={this.state.disabled}
+                                onPress={this.onSave.bind(this)}
+                                backgroundColor='#03A9F4'
+                                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                                title='GENERAR'/>
+                        </View>
+                    </View>
 
                 </Card>
             </View>

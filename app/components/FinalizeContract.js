@@ -56,17 +56,17 @@ export default class FinalizeContract extends React.Component {
                             style={{flexDirection: 'row'}}>
                             <View style={{padding: 20}}>
                                 <Button
-                                    style={{paddingHorizontal: 15}}
-                                    onPress={this.save.bind(this)}
-                                    title="FINALIZAR"
-                                />
-                            </View>
-                            <View style={{padding: 20}}>
-                                <Button
                                     color="#841584"
                                     style={{paddingHorizontal: 15}}
                                     onPress={this.cancel.bind(this)}
                                     title="CANCELAR"
+                                />
+                            </View>
+                            <View style={{padding: 20}}>
+                                <Button
+                                    style={{paddingHorizontal: 15}}
+                                    onPress={this.save.bind(this)}
+                                    title="FINALIZAR"
                                 />
                             </View>
                         </View>

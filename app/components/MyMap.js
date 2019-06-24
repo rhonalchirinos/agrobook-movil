@@ -1,7 +1,7 @@
 import React from 'react';
-import {KeyboardAvoidingView, StyleSheet, TextInput, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import {Button, Icon} from "react-native-elements";
+import {Button} from "react-native-elements";
 import ContractService from "../store/ContractService";
 
 export default class MyMap extends React.Component {
@@ -10,8 +10,8 @@ export default class MyMap extends React.Component {
         super(props);
         this.state = {
             coordinate: {
-                latitude: 12,
-                longitude: 12,
+                latitude: -33.4726900,
+                longitude: -70.6472400,
             }
         }
     }
@@ -21,12 +21,19 @@ export default class MyMap extends React.Component {
         this.back = navigation.getParam('back');
     }
 
-    load(){
-        ContractService.search(this.state.coordinate.longitude, this.state.coordinate.latitude ).then( (resp) => {
-            const sear = resp.data.features[0].properties.name  + '; ' + resp.data.features[0].properties.country;
-            this.setState({search: sear});
-            this.props.navigation.pop(1);
-            this.back({ item: sear });
+    load() {
+        ContractService.search(this.state.coordinate.longitude, this.state.coordinate.latitude).then((resp) => {
+            if (resp.data.features.length !== 0) {
+                const sear = resp.data.features[0].properties.name + '; ' + resp.data.features[0].properties.country;
+                this.setState({search: sear});
+                this.props.navigation.pop(1);
+                this.back({item: sear});
+            } else {
+                this.setState({search: 'direcciòn no encontrada'});
+                this.props.navigation.pop(1);
+                this.back({item: sear});
+            }
+
         });
     }
 
@@ -40,50 +47,33 @@ export default class MyMap extends React.Component {
                             console.log(center);
                             const northeast = {
                                 latitude: center.latitude + center.latitudeDelta / 2,
-                                longitude:  center.longitude + center.longitudeDelta / 2,
+                                longitude: center.longitude + center.longitudeDelta / 2,
                             };
-                            console.log( northeast)
+                            console.log(northeast);
                             this.setState({coordinate: center});
                         }}
                         style={styles.map}
                         initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
+                            latitude: -33.4726900,
+                            longitude: -70.6472400,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
-                        }}
-                    >
-                        <Marker coordinate={this.state.coordinate} />
-
+                        }}>
+                        <Marker coordinate={this.state.coordinate}/>
                     </MapView>
-
                 </View>
-
                 <KeyboardAvoidingView style={{flexDirection: 'row'}} behavior="padding" enabled>
-                    <TextInput
-                        style={styles.input}
-                        underlineColorAndroid='transparent'
-                        placeholderTextColor='black'
-                        autoCapitalize='none'
-                        value={this.state.search}
-                        onChangeText={(address) => {
-                            this.setState({address});
-                        }}
-                    />
                     <Button
-                        style={{paddingHorizontal: 15}}
                         color="#841584"
                         onPress={this.load.bind(this)}
-                        icon={<Icon name='search' type='font-awesome'/>}
+                        title="cargar direccion"
                     />
                 </KeyboardAvoidingView>
 
             </View>
         );
     }
-
 }
-
 
 const styles = StyleSheet.create({
     container: {

@@ -59,7 +59,7 @@ export default class Home extends React.Component {
         const _this = this;
         Alert.alert(
             'Salir',
-            'Desea salir de la aplicaciòn?',
+            'Desea salir de la aplicación?',
             [
                 {text: 'Cancel', onPress: () => console.log('Cancel Button Pressed'), style: 'cancel'},
                 {

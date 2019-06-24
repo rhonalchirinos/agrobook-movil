@@ -79,7 +79,6 @@ export default class HomeItemDetail extends React.Component {
         return (
             <View>
                 <ScrollView>
-
                     <Header
                         placement='left'
                         leftComponent={{
@@ -150,7 +149,7 @@ export default class HomeItemDetail extends React.Component {
                         <ListItem
                             title={
                                 <View>
-                                    <Text> OBSERVACION: {this.state.item.seed}</Text>
+                                    <Text> OBSERVACION: {this.state.item.observation}</Text>
                                 </View>
                             }
                         />

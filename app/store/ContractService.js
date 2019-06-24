@@ -43,6 +43,7 @@ export default class ContractService {
      * @return contract
      * */
     static async view(id, value) {
+        console.log('send', value, '<----');
         return await axios.post(`${conf.api}contracts/${id}/view`, value);
     }
 

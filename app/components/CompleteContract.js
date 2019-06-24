@@ -3,12 +3,12 @@ import {Alert, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Button, Card} from "react-native-elements";
 import DatePicker from "react-native-datepicker";
 import ContractService from "../store/ContractService";
-
+import moment from 'moment';
 export default class CompleteContract extends React.Component {
 
     state = {
         floor_power: '0',
-        planting_date: Date(),
+        planting_date: '',
         disabled: true
     };
 
@@ -28,7 +28,10 @@ export default class CompleteContract extends React.Component {
 
     save() {
         if (this.valid()) {
-            ContractService.view(this.id, this.state).then((resp) => {
+            ContractService.view(this.id, {
+                floor_power: this.state.floor_power,
+                planting_date:  moment(this.state.planting_date, 'DD/MM/YYYY').format('MM/DD/YYYY'),
+            }).then((resp) => {
                 this.onSave(resp.data);
             }).catch((error) => {
                 console.log(error);
@@ -82,9 +85,10 @@ export default class CompleteContract extends React.Component {
                         <Text> FECHA DE SIEMBRA </Text>
                         <DatePicker
                             date={this.state.planting_date}
+                            style={{ width: 150}}
                             mode="date"
                             placeholder="FECHA"
-                            format="DD-MM-YYYY"
+                            format="DD/MM/YYYY"
                             confirmBtnText="Confirmar"
                             cancelBtnText="Cancelar"
                             customStyles={{
@@ -106,18 +110,18 @@ export default class CompleteContract extends React.Component {
                         <View style={{flexDirection: 'row'}}>
                             <View style={{padding: 20}}>
                                 <Button
-                                    disabled={this.state.disabled}
-                                    style={{paddingHorizontal: 15}}
-                                    onPress={this.save.bind(this)}
-                                    title="ACTUALIZAR"
-                                />
-                            </View>
-                            <View style={{padding: 20}}>
-                                <Button
                                     style={{paddingHorizontal: 15}}
                                     color="#841584"
                                     onPress={this.cancel.bind(this)}
                                     title="CANCELAR"
+                                />
+                            </View>
+                            <View style={{padding: 20}}>
+                                <Button
+                                    disabled={this.state.disabled}
+                                    style={{paddingHorizontal: 15}}
+                                    onPress={this.save.bind(this)}
+                                    title="ACTUALIZAR"
                                 />
                             </View>
                         </View>
@@ -136,6 +140,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input: {
+        width: 150,
         fontSize: 12,
         padding: 5,
         margin: 5,
